@@ -2,6 +2,9 @@
 //! versions keep that structure (the groups they add are optional, DXF Reference) and differ in
 //! `$ACADVER`, from 2004 in the newer DIMSTYLE groups, and from 2007 in UTF-8 text (the caller
 //! picks the text encoding) and MULTILEADER entities (older files get LEADER + MTEXT).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-20): a VIEWPORT's
+//! view centre (group 12) is read and written in DCS. See crates/io/tests/viewport_twist_dcs.rs.
 
 use std::collections::HashMap;
 

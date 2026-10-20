@@ -1,4 +1,7 @@
 //! DXF → Drawing.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-20): a VIEWPORT's
+//! view centre (group 12) is read and written in DCS. See crates/io/tests/viewport_twist_dcs.rs.
 
 use std::collections::HashMap;
 
