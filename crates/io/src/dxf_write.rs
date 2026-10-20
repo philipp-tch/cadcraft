@@ -1057,7 +1057,8 @@ fn entity(w: &mut W, d: &Drawing, e: &Entity, owner: &str, paper: bool, cx: &Ctx
             // Status 68: a positive value is "on" (the stacking order; 1 is the active viewport), 0 off.
             w.i(68, if v.on { i64::from(v.id.clamp(1, 32767)) } else { 0 });
             w.i(69, i64::from(v.id));
-            w.p2(12, v.view_center);
+            // In DCS (see the reader): the model point turned by the twist; the target stays 0.
+            w.p2(12, v.view_center.rotate(v.view_twist()));
             w.f(45, v.view_height);
             // View twist (degrees), when the viewport has one.
             if v.view_twist() != 0.0 {
