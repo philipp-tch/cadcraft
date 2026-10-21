@@ -11,6 +11,9 @@
 //! collide with the handles the writer hands out). A reference to something that is gone is
 //! dropped (from reactor lists and dictionaries) or written as the null handle `0`; objects whose
 //! owner is gone go with it.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-21): handles
+//! above 2^48 are believed. See crates/io/tests/dynblock_read.rs.
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, HashMap, HashSet};
@@ -51,8 +54,10 @@ const MAX_OBJECTS: usize = 1_000_000;
 const MAX_XDATA_GROUPS: usize = 16_384;
 /// Longest ownership chain followed.
 const MAX_DEPTH: usize = 64;
-/// Handles above this are not believed (hostile files); references to them are dropped.
-const MAX_HANDLE: u64 = 1 << 48;
+/// Handles above this are not believed (hostile files); references to them are dropped. DXF
+/// handles are up to 16 hex digits, and AutoCAD writes some above 2^48 (e.g. 0xDAD1…): the whole
+/// 64-bit range is believed, so their dynamic blocks and other foreign objects are kept.
+const MAX_HANDLE: u64 = u64::MAX;
 
 /// Record types that structure a file: never written as an entity of another type.
 const STRUCTURAL: &[&str] = &["", "SECTION", "ENDSEC", "EOF", "TABLE", "ENDTAB", "BLOCK", "ENDBLK", "SEQEND", "VERTEX", "ATTRIB", "CLASS"];
