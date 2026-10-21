@@ -2,6 +2,8 @@
 //!
 //! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-20): a VIEWPORT's
 //! view centre (group 12) is read and written in DCS. See crates/io/tests/viewport_twist_dcs.rs.
+//! 2026-10-21: a layout's plot window corners (48/49/140/141) are read, taken over from
+//! storytold/cadcraft PR #1683 (commit 81f0aa5, by its author).
 
 use std::collections::HashMap;
 

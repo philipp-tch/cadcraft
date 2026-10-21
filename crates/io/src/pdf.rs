@@ -462,7 +462,6 @@ fn sheet(d: &Drawing, space: &Space, o: &PdfOptions, links_to: &[(Handle, String
     Ok(SheetPage { media, list, map, clip_pt, layers, links, label: sheet_name(space) })
 }
 
-/// Source and destination origins for the shared model-space PDF/PNG placement behavior.
 /// The plot window of a layout whose page setup plots a window (plot area "window"), in paper
 /// units; `None` for another plot area, model space, or a window without area.
 fn layout_window(space: &Space, page: &PageSetup) -> Option<Bounds2> {
@@ -472,6 +471,7 @@ fn layout_window(space: &Space, page: &PageSetup) -> Option<Bounds2> {
     (ok && w.width() > 0.0 && w.height() > 0.0).then_some(w)
 }
 
+/// Source and destination origins for the shared model-space PDF/PNG placement behavior.
 pub(crate) fn placement(space: &Space, bounds: &Bounds2, fit: bool, sheet: &Sheet, o: &PdfOptions) -> (Vec2, Vec2) {
     if matches!(space, Space::Model) {
         let from = if bounds.is_empty() {
