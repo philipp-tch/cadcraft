@@ -543,7 +543,7 @@ fn dragging_a_distance_grip_changes_the_distance() {
 /// The DOOR drawing with every handle moved above 2^48: AutoCAD writes such handles (seen in
 /// drawings whose handles start at 0xDAD1…), and the dynamic block's objects must still be kept.
 fn far_handles(src: &str) -> String {
-    const SHIFT: u64 = 0xDAD1_0000_0000_0;
+    const SHIFT: u64 = 0x000D_AD10_0000_0000;
     let is_handle = |code: i32| matches!(code, 5 | 105 | 320..=369 | 390..=399 | 480 | 481 | 1005);
     let mut out = String::new();
     for line in src.lines() {
