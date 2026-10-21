@@ -10,6 +10,10 @@
 //! Several sheets go into one file ([`pdf_sheets`], the `layouts` option), each page labelled
 //! with its layout name. Drawing layers become PDF layers (optional content groups) that a PDF
 //! viewer can switch on and off, and entity hyperlinks become link annotations.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-21): a layout
+//! whose page setup plots a window plots that window (`layout_window`), see
+//! crates/io/tests/layout_plot_window_pdf.rs.
 
 use std::fmt::Write as _;
 
@@ -421,10 +425,16 @@ fn sheet(d: &Drawing, space: &Space, o: &PdfOptions, links_to: &[(Handle, String
     // Relative point sizes follow the plotted window (else the extents).
     let view_height = window.map(|w| w.height()).unwrap_or(0.0);
     let list = cadcraft_render::build_plot(d, space, &cadcraft_render::Options { tolerance, view_height, ..ropts });
-    let b = window.unwrap_or(list.bounds);
+    // A layout whose page setup plots a window plots that window, as AutoCAD does: its corner
+    // lands on the printable area's corner (or its centre on the centre, with "center the plot").
+    let sheet_window = layout_window(space, &page);
+    let b = window.or(sheet_window).unwrap_or(list.bounds);
     let s = plot_scale(&b, &sheet, fit, o.scale);
     let map = if fit || matches!(space, Space::Model) {
         let (from, to) = placement(space, &b, fit, &sheet, o);
+        Map { from, s, to, k }
+    } else if let Some(w) = sheet_window {
+        let (from, to) = if page.center { (w.center(), sheet.printable.center()) } else { (w.min, sheet.printable.min) };
         Map { from, s, to, k }
     } else {
         Map { from: Vec2::ZERO, s, to: Vec2::ZERO, k }
@@ -453,6 +463,15 @@ fn sheet(d: &Drawing, space: &Space, o: &PdfOptions, links_to: &[(Handle, String
 }
 
 /// Source and destination origins for the shared model-space PDF/PNG placement behavior.
+/// The plot window of a layout whose page setup plots a window (plot area "window"), in paper
+/// units; `None` for another plot area, model space, or a window without area.
+fn layout_window(space: &Space, page: &PageSetup) -> Option<Bounds2> {
+    let [x1, y1, x2, y2] = page.plot_window;
+    let ok = space.is_paper() && page.plot_area == "window" && [x1, y1, x2, y2].iter().all(|v| v.is_finite());
+    let w = Bounds2::new(Vec2::new(x1.min(x2), y1.min(y2)), Vec2::new(x1.max(x2), y1.max(y2)));
+    (ok && w.width() > 0.0 && w.height() > 0.0).then_some(w)
+}
+
 pub(crate) fn placement(space: &Space, bounds: &Bounds2, fit: bool, sheet: &Sheet, o: &PdfOptions) -> (Vec2, Vec2) {
     if matches!(space, Space::Model) {
         let from = if bounds.is_empty() {
