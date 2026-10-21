@@ -31,7 +31,16 @@ fn viewport(d: &Drawing) -> Viewport {
 fn drawing() -> Drawing {
     let mut d = Drawing::new_metric();
     let sheet = Space::Paper(d.layouts[0].name.clone());
-    let vp = Viewport { center: Vec3::new(230.0, 80.0, 0.0), width: 420.0, height: 120.0, view_center: MODEL, view_height: 60.0, id: 2, twist: TWIST.rem_euclid(std::f64::consts::TAU), ..Viewport::default() };
+    let vp = Viewport {
+        center: Vec3::new(230.0, 80.0, 0.0),
+        width: 420.0,
+        height: 120.0,
+        view_center: MODEL,
+        view_height: 60.0,
+        id: 2,
+        twist: TWIST.rem_euclid(std::f64::consts::TAU),
+        ..Viewport::default()
+    };
     d.add(&sheet, Common::default(), EntityKind::Viewport(vp)).unwrap();
     d
 }
