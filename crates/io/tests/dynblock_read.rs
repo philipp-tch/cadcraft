@@ -4,6 +4,9 @@
 //! The fixture is synthetic, written for this test: a DOOR block whose BLOCK_RECORD carries an
 //! evaluation graph with a visibility parameter (Open, Closed), a linear parameter (Width, a list
 //! of values), a stretch action on it, a lookup parameter and its lookup table, and a grip.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-21): the test
+//! with handles above 2^48.
 
 use cadcraft_doc::dynblock::{ActionKind, DynamicBlock, ParameterKind, dynamic_block};
 use cadcraft_doc::{Handle, RawTag};
