@@ -4,6 +4,9 @@
 //! triangles and points, each tagged with its top-level entity handle and resolved colour.
 //! Linetypes, hatches, text, block references and dimensions are expanded here. The UI uploads
 //! the list to the GPU; [`raster`] draws it on the CPU (PNG export, plot preview, tests).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-21): the linetype
+//! scale of a block reference multiplies that of the objects inside (`sub_ctx`).
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 #![forbid(unsafe_code)]
 
@@ -1529,7 +1532,9 @@ fn sub_ctx<'a>(ctx: &Ctx<'a>, e: &Entity, m: Mat3) -> Ctx<'a> {
         top: ctx.top,
         frozen: ctx.frozen,
         vp_colors: ctx.vp_colors,
-        lt_factor: ctx.lt_factor,
+        // The reference's own linetype scale (group 48) multiplies that of the objects inside,
+        // as LTSCALE does for the drawing (Otto fork, see tests/block_ltscale.rs).
+        lt_factor: ctx.lt_factor * if e.common.ltscale.is_finite() && e.common.ltscale > 0.0 { e.common.ltscale } else { 1.0 },
         block_pstyle: ctx.block_pstyle,
         // The reference's own, set by the caller (`Builder::transparency` while it draws).
         block_transparency: ctx.block_transparency,
