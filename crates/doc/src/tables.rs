@@ -1,5 +1,9 @@
 //! Symbol tables and non-graphical objects: layers, linetypes, text and dimension styles,
 //! blocks, layouts, named views and UCSs.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-21): the page
+//! setup's plot window (`PageSetup::plot_window`), taken over from storytold/cadcraft PR #1683
+//! (commit 81f0aa5, by its author).
 
 use std::sync::Arc;
 
