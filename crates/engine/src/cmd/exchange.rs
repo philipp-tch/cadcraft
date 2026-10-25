@@ -6,6 +6,10 @@
 //! Files go through the host's io hooks ([`super::file::io`]) like OPEN and SAVEAS, so the engine
 //! stays I/O-agnostic; the JSON forms never open dialogs (the UI asks for files when these
 //! commands come from a menu, the tool bar or the command line).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): PUBLISH
+//! writes PDF whatever the page setup device and refuses sheets that would share a file, taken over
+//! from storytold/cadcraft PR #1268 (commits fad8b0a and 469104c, by its author).
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::Arc;

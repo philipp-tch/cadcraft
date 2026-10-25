@@ -4,6 +4,12 @@
 //! triangles and points, each tagged with its top-level entity handle and resolved colour.
 //! Linetypes, hatches, text, block references and dimensions are expanded here. The UI uploads
 //! the list to the GPU; [`raster`] draws it on the CPU (PNG export, plot preview, tests).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author); the linetype scale of a block reference scales the
+//! linetypes inside the block, taken over from storytold/cadcraft main (commit e04056f, PR #1830),
+//! which release 0.12.0 lacks.
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 #![forbid(unsafe_code)]
 

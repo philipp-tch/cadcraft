@@ -2,6 +2,13 @@
 //! versions keep that structure (the groups they add are optional, DXF Reference) and differ in
 //! `$ACADVER`, from 2004 in the newer DIMSTYLE groups, and from 2007 in UTF-8 text (the caller
 //! picks the text encoding) and MULTILEADER entities (older files get LEADER + MTEXT).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author); a VIEWPORT's view centre (group 12) is read and
+//! written in DCS, see crates/io/tests/viewport_twist_dcs.rs; a layout's paper-space viewport
+//! (id 1) is written ahead of its other viewports (`sheet_first`), taken over from
+//! storytold/cadcraft main (commit 7db656f, PR #1782), which release 0.12.0 lacks.
 
 use std::collections::HashMap;
 

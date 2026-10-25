@@ -1,4 +1,8 @@
 //! Measure Distance uses real pointer snaps in MODEL and PAPER, including viewport scale (#516).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_engine::Session;
 use cadcraft_engine::doc::{Common, Drawing, EntityKind, Line, Space, Viewport};

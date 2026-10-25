@@ -1,5 +1,9 @@
 //! The view twist (VIEWTWIST): DVIEW TWist turns the Model tab's view, ZOOM Previous turns it
 //! back, each VPORTS tile keeps its own (DXF VPORT group 51), and VIEW Save/Restore keep it.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view twist
+//! (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_engine::geom::Vec2;
 use cadcraft_engine::{Session, View, sysvars};

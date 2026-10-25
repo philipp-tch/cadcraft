@@ -5,6 +5,10 @@
 //! A clipped viewport keeps its rectangle as the boundary's extents and points at a paper-space
 //! entity (a closed polyline, circle, ellipse or spline) whose outline clips what it shows
 //! ([`Viewport::clip`], DXF group 340).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{Drawing, EntityKind, Handle, Space, Viewport, VportConfig, VportTile};
 use cadcraft_geom::{Bounds2, PolyVertex, Vec2};

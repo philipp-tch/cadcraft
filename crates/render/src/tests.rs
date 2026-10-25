@@ -1,3 +1,7 @@
+// Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+// twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+// storytold/cadcraft PR #1230 (by its author).
+
 use crate::raster::{RasterOptions, View, render};
 use crate::*;
 use cadcraft_doc::{Common, Drawing, EntityKind, Hatch, HatchLoop, Space};

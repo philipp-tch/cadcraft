@@ -4,6 +4,10 @@
 //! A new drawing from a template is the template's content (layers, styles, layouts, objects…)
 //! as an untitled drawing: saving asks for a name, so the template file is never overwritten by
 //! accident. CADCraft ships no template; templates are the user's files.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use std::sync::{Mutex, MutexGuard, OnceLock, PoisonError};
 

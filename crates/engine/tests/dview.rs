@@ -2,6 +2,10 @@
 //! TWist, PAn, Zoom, Off and Undo on a 2D view; the 3D options not available yet. It works on the
 //! Model tab and inside an active layout viewport (whose twist is an undoable edit of the
 //! viewport), and not on a layout sheet.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view twist
+//! (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{EntityKind, Handle, Viewport};
 use cadcraft_engine::geom::Vec2;

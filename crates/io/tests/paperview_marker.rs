@@ -1,5 +1,9 @@
 //! The DXF reader drops the paper-space viewport the writer adds (marked `1000 PAPERVIEW` in
 //! CADCraft xdata) but keeps a real viewport whose frozen or recoloured layer is named PAPERVIEW.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_color::Color;
 use cadcraft_doc::*;

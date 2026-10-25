@@ -4,6 +4,10 @@
 //! Tables the drawing keeps live in `Drawing::plot_style_tables` and are saved with it; they
 //! shadow built-in tables of the same name. Editing a built-in table stores an edited copy in
 //! the drawing.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): AutoCAD
+//! .ctb/.stb plot style tables are read, taken over from storytold/cadcraft PR #2034 (part of
+//! commit b935527b, by its author).
 
 use cadcraft_doc::{Drawing, PlotStyle, PlotStyleKind, PlotStyleTable};
 use serde_json::{Value, json};

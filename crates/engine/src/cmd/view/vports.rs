@@ -7,6 +7,10 @@
 //! tile shows the model space view itself, so ZOOM, PAN and every pick work in it unchanged. The
 //! UI draws the tiles from [`Session::model_tiles`] and hands clicks in other tiles to
 //! [`Session::click_tile`]. In a layout -VPORTS is MVIEW.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use std::sync::Arc;
 

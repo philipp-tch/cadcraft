@@ -2,6 +2,8 @@
 //! point turned by the view twist (51), measured from the view target (17), per the public DXF
 //! Reference. CADCraft keeps the model point; reading turns it back, writing turns it again.
 //! Far from the origin (national grids) the two readings differ by kilometres.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-20).
 
 use cadcraft_doc::*;
 use cadcraft_geom::{Vec2, Vec3};

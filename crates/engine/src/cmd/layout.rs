@@ -3,6 +3,10 @@
 //!
 //! Plotting goes through the host's [`super::file::IoHooks::plot`] hook so the engine stays
 //! I/O-agnostic.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{Drawing, Entity, EntityKind, EntityStore, Handle, Layout, PageSetup, Space, Viewport};
 use cadcraft_geom::{Bounds2, Vec2};

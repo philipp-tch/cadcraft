@@ -5,6 +5,10 @@
 //! ways: programmatically with JSON parameters ([`Session::execute`], no dialogs, used by the
 //! control channel, MCP, CLI and scripts) and interactively through prompts ([`Session::start`],
 //! [`Session::input`], [`Session::cmdline`]) exactly like typing at AutoCAD's command line.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 #![forbid(unsafe_code)]
 

@@ -1,6 +1,10 @@
 //! DXF save → reopen keeps the VIEW table's paper space flag (with the view's layout), the view
 //! twist and the layer snapshot, and the VPORT table's tiled model viewports and saved viewport
 //! configurations (#463).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::geom::Vec2;
 use cadcraft_doc::{Drawing, NamedView, VportConfig, VportTile};

@@ -1,6 +1,10 @@
 //! External references (#525): XATTACH and -XREF on real DXF files in a temporary folder —
 //! loading with `xref|name` symbols, saving only the reference, reopening, Reload/Unload/Detach/
 //! Path, Bind and XBIND, overlays, missing files, circular and deeply nested references.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): an xref's
+//! saved path is found regardless of letter case, taken over from storytold/cadcraft PR #1982
+//! (commit fae9f3c, by its author).
 
 use std::path::{Path, PathBuf};
 use std::sync::Arc;

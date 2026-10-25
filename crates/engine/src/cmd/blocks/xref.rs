@@ -5,6 +5,10 @@
 //! space of the referenced drawing, loaded when the host drawing opens and on Reload, never saved
 //! with the host. Symbols that come with it are named `xref|name` ([`load`]). Bind turns it into
 //! a normal block of the host drawing ([`bind`]).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 mod bind;
 pub(crate) mod load;

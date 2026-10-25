@@ -1,5 +1,9 @@
 //! Plot style line ends, joins and fill patterns (issue #564): wide lines become outlines with
 //! the style's ends and joins, solid fills become the style's pattern.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use std::sync::Arc;
 

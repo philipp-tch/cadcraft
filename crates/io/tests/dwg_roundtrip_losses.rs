@@ -1,5 +1,11 @@
 //! Data that used to be lost only when a drawing is saved as DWG and reopened (the DWG bridge
 //! converts our DXF with acadrust), and the paper-space viewport the DXF writer adds for it.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author); a layout's paper-space viewport (id 1) is written
+//! ahead of its other viewports (`sheet_first`), taken over from storytold/cadcraft main (commit
+//! 7db656f, PR #1782), which release 0.12.0 lacks.
 #![cfg(not(target_arch = "wasm32"))]
 
 use cadcraft_color::{Color, Rgb};

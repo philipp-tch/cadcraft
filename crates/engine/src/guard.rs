@@ -5,6 +5,10 @@
 //! taking down the app: from `begin` or `input` at once (the session restores the drawing), from
 //! `prompt` or `preview` (which can't end the command) at the next input, with a fallback prompt
 //! and no preview until then.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use std::any::Any;
 use std::cell::Cell;

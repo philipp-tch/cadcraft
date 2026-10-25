@@ -1,5 +1,9 @@
 //! A layout viewport whose own layer is frozen shows neither its border nor its contents, on
 //! screen and when plotting; turned off, the layer hides only the border (issue #395).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{Circle, Common, Drawing, EntityKind, Space, Viewport};
 use cadcraft_geom::{Vec2, Vec3};

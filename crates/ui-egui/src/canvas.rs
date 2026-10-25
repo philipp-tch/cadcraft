@@ -3,6 +3,8 @@
 //!
 //! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-21): the view
 //! twist of storytold/cadcraft PR #1230 carried onto 0.10.0 (`Xf::twist` in two new initialisers).
+//! 2026-10-25, on 0.12.0: the view twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport
+//! twist), taken over from storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_color::Rgb;
 use cadcraft_doc::Handle;
