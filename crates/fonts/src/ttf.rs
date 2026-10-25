@@ -711,9 +711,41 @@ impl OutlinePen for Pen {
     }
 }
 
-/// Cap height of a font in font units at 1000 units per em: the OS/2 value, else the height
-/// of its "H", else an estimate from the ascent.
+/// Cap height of a font in font units at 1000 units per em: an override for this font from
+/// `CADCRAFT_CAP_HEIGHT`, else the OS/2 value, else the height of its "H", else an estimate from
+/// the ascent.
 fn cap_height(f: &FontRef) -> f64 {
+    cap_height_with(f, cap_overrides())
+}
+
+/// Cap heights that a substitute font takes from the font it stands in for, read once from
+/// `CADCRAFT_CAP_HEIGHT` ("PostScriptName=units at 1000 per em", entries separated by `;`). A
+/// metric-compatible substitute keeps the advance widths of the original; text is scaled by the
+/// cap height, so with its own (smaller) cap height every text would grow and wrap earlier.
+fn cap_overrides() -> &'static [(String, f32)] {
+    static OVERRIDES: OnceLock<Vec<(String, f32)>> = OnceLock::new();
+    OVERRIDES.get_or_init(|| parse_cap_overrides(&std::env::var("CADCRAFT_CAP_HEIGHT").unwrap_or_default()))
+}
+
+/// Parse `CADCRAFT_CAP_HEIGHT`; entries without a name or with a value outside (0, 1000] are ignored.
+fn parse_cap_overrides(s: &str) -> Vec<(String, f32)> {
+    s.split(';')
+        .filter_map(|e| {
+            let (name, v) = e.split_once('=')?;
+            let v: f32 = v.trim().parse().ok()?;
+            let name = name.trim().to_ascii_lowercase();
+            (!name.is_empty() && v.is_finite() && v > 0.0 && v <= UPEM).then_some((name, v))
+        })
+        .collect()
+}
+
+fn cap_height_with(f: &FontRef, overrides: &[(String, f32)]) -> f64 {
+    if !overrides.is_empty() {
+        let ps = f.localized_strings(skrifa::string::StringId::POSTSCRIPT_NAME).english_or_first().map(|n| n.to_string().to_ascii_lowercase());
+        if let Some(v) = ps.and_then(|ps| overrides.iter().find(|(n, _)| *n == ps).map(|(_, v)| *v)) {
+            return f64::from(v).max(1.0);
+        }
+    }
     let metrics = f.metrics(Size::new(UPEM), LocationRef::default());
     let measured = || {
         let gid = f.charmap().map('H')?;
@@ -981,5 +1013,31 @@ mod geometry_budget_tests {
         assert!(!shaped.is_empty());
         assert_eq!(shaped.glyphs, vec![contours]);
         assert!(shaped.text.is_empty());
+    }
+}
+
+#[cfg(test)]
+mod cap_override_tests {
+    use super::*;
+
+    #[test]
+    fn cap_height_overrides_parse_and_reject_bad_entries() {
+        let o = parse_cap_overrides(" LiberationSans=716.3 ; LiberationSans-Bold=716.3;=5;Bad=0;Huge=1001;NaN=x;");
+        assert_eq!(o, vec![("liberationsans".to_string(), 716.3), ("liberationsans-bold".to_string(), 716.3)]);
+        assert!(parse_cap_overrides("").is_empty());
+    }
+
+    #[test]
+    fn a_substitute_takes_the_cap_height_of_the_font_it_stands_in_for() {
+        // Skips cleanly when no common system font is installed (as `system_font_outlines_when_available`).
+        let Some(face) = ["LiberationSans-Regular", "DejaVuSans", "Arial"].iter().find_map(|n| find(n)) else {
+            return;
+        };
+        let f = face.font().unwrap();
+        let own = cap_height_with(&f, &[]);
+        let ps = f.localized_strings(skrifa::string::StringId::POSTSCRIPT_NAME).english_or_first().unwrap().to_string();
+        let o = parse_cap_overrides(&format!("{ps}=716.3"));
+        assert!((cap_height_with(&f, &o) - 716.3).abs() < 0.01, "override wins");
+        assert!((cap_height_with(&f, &parse_cap_overrides("OtherFont=500")) - own).abs() < 1e-9, "other fonts unchanged");
     }
 }
