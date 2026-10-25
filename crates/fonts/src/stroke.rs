@@ -4,6 +4,10 @@
 //! Each glyph is `(width, strokes)`. A stroke is a run of points; each point is two characters:
 //! an x digit `0..=6` and a y letter where `a` = -2, `c` = 0 (baseline), `g` = 4 (x-height),
 //! `i` = 6 (cap height). Strokes are separated by spaces.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): user SHX
+//! text fonts (shapes 1.0/1.1, unifont 1.0) are read from CADCRAFT_SHXPATH and Latin accents stay
+//! single-stroke, taken over from storytold/cadcraft PR #1031 (commit 0de6ec8, by its author).
 
 pub(crate) const CAP: f64 = 6.0;
 pub(crate) const GAP: f64 = 1.6;

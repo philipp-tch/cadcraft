@@ -10,6 +10,10 @@
 //! Bidirectional Algorithm, Arabic joining) and `complex` (OpenType shaping with `harfrust`):
 //! each run is shaped in the font that draws it before glyphs are placed, so the fallback font
 //! drawing Arabic in a stroke-font style joins its letters too.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): user SHX
+//! text fonts (shapes 1.0/1.1, unifont 1.0) are read from CADCRAFT_SHXPATH and Latin accents stay
+//! single-stroke, taken over from storytold/cadcraft PR #1031 (commit 0de6ec8, by its author).
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 #![forbid(unsafe_code)]
 

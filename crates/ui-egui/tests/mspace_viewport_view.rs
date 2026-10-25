@@ -3,6 +3,10 @@
 //! so realtime navigation redraws them without rebuilding anything. They used to stay frozen:
 //! realtime navigation changes the viewport's view without a new revision, and the layout's list
 //! kept showing the old view until some command rebuilt it.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_engine::Session;
 use cadcraft_engine::doc::{Circle, Common, Drawing, EntityKind, Line, Space, Viewport};

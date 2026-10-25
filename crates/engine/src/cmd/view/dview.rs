@@ -12,6 +12,10 @@
 //! layout with no active viewport it is not available. A Model tab twist is a view change like
 //! ZOOM (view history, not undo). A layout viewport's twist belongs to the viewport entity, so a
 //! DVIEW that changed it is one undo step.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view twist
+//! (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use std::f64::consts::TAU;
 use std::sync::Arc;

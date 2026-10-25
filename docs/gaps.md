@@ -1,3 +1,9 @@
+<!--
+Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): user SHX text
+fonts (shapes 1.0/1.1, unifont 1.0) are read from CADCRAFT_SHXPATH and Latin accents stay
+single-stroke, taken over from storytold/cadcraft PR #1031 (commit 0de6ec8, by its author).
+-->
+
 # Where CADCraft falls short of AutoCAD
 
 > **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-16 · **Change:** minor (Command Aliases dialog for ALIASEDIT: U12 and E5 narrowed) · **Target:** Autodesk AutoCAD 2027

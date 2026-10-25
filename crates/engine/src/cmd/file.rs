@@ -1,6 +1,10 @@
 //! File menu: new, close, switching drawings. Open/save of DWG/DXF go through the io layer,
 //! registered by the host (desktop/CLI) via [`crate::cmd::file::set_io`]. On the web, where there is
 //! no file system, saved files reach the user through the host's [`crate::cmd::file::set_deliver`].
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): AutoCAD
+//! .ctb/.stb plot style tables are read, taken over from storytold/cadcraft PR #2034 (part of
+//! commit b935527b, by its author).
 
 mod pgp;
 mod template;

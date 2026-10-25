@@ -3,6 +3,10 @@
 //! value and the text length), the compressed text length, then zlib-compressed text of nested
 //! `key=value` and `name{ … }` blocks. Read into CADCraft's [`PlotStyleTable`] so a drawing whose
 //! layouts name the user's own table plots with its colours and lineweights.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): AutoCAD
+//! .ctb/.stb plot style tables are read, taken over from storytold/cadcraft PR #2034 (part of
+//! commit b935527b, by its author).
 
 use cadcraft_color::Rgb;
 use cadcraft_doc::{EndStyle, JoinStyle, PlotStyle, PlotStyleKind, PlotStyleTable};

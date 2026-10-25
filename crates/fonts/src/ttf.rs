@@ -13,6 +13,12 @@
 //!
 //! On native builds both start from the `CADCRAFT_FONTALT` / `CADCRAFT_FONTFALLBACK`
 //! environment variables.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): user SHX
+//! text fonts (shapes 1.0/1.1, unifont 1.0) are read from CADCRAFT_SHXPATH and Latin accents stay
+//! single-stroke, taken over from storytold/cadcraft PR #1031 (commit 0de6ec8, by its author); a
+//! substitute font can take the cap height of the font it stands in for (CADCRAFT_CAP_HEIGHT),
+//! offered upstream in storytold/cadcraft issue #2123.
 
 use std::collections::HashMap;
 use std::path::PathBuf;

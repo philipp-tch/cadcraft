@@ -1,6 +1,10 @@
 //! The linetype scale of a block reference (DXF group 48 on the INSERT) multiplies the linetype
 //! scale of the objects in the block, as LTSCALE does for the whole drawing: a DASHED line inside
 //! a block inserted at linetype scale 2 has dashes twice as long.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the linetype
+//! scale of a block reference scales the linetypes inside the block, taken over from
+//! storytold/cadcraft main (commit e04056f, PR #1830), which release 0.12.0 lacks.
 
 use std::sync::Arc;
 

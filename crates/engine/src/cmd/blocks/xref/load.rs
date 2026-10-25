@@ -9,6 +9,10 @@
 //! attached xrefs load with it (overlays don't), at most [`MAX_BLOCK_DEPTH`] levels deep; a drawing that is already being
 //! loaded further up (a circular reference) is not loaded again. Every failure leaves the xref's
 //! block empty with a status saying why; nothing here stops the host drawing from opening.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): an xref's
+//! saved path is found regardless of letter case, taken over from storytold/cadcraft PR #1982
+//! (commit fae9f3c, by its author).
 
 use std::path::{Path, PathBuf};
 use std::sync::Arc;

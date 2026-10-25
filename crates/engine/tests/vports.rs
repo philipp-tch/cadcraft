@@ -1,6 +1,10 @@
 //! Tiled model space viewports (#463): -VPORTS SIngle, 2/3/4, Join, Save, Restore, Delete and ?,
 //! View > Viewports > n in the Model tab, the current tile and its own view. (The DXF VPORT table
 //! round trip is tested in `cadcraft-io`'s `view_tables_roundtrip`.)
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_engine::doc::{EntityKind, Space};
 use cadcraft_engine::geom::Vec2;

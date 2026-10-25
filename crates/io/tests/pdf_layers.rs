@@ -1,6 +1,10 @@
 //! PDF export with layers, several sheets and hyperlinks (issue #560): drawing layers become
 //! optional content groups, `layouts` plots several sheets into one file with page labels, and
 //! linked entities get link annotations. The tests parse the written objects.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_color::Color;
 use cadcraft_doc::{Block, Common, Drawing, Entity, EntityKind, Handle, Insert, Layer, Line, Space, Viewport};

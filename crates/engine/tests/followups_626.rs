@@ -1,5 +1,9 @@
 //! Drafting follow-ups (#626): isometric snap gives way to PolarSnap, and MVIEW Restore puts a
 //! model space viewport configuration on a layout.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{EntityKind, Space, Viewport, VportTile};
 use cadcraft_engine::Session;

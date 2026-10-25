@@ -10,6 +10,11 @@
 //! cadcraft-cli perf FILE                           canvas display-list build of a drawing, zoomed in step by step
 //! cadcraft-cli sample (bracket|floorplan) OUT       write a built-in sample drawing
 //! ```
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): AutoCAD
+//! .ctb/.stb plot style tables are read, taken over from storytold/cadcraft PR #2034 (part of
+//! commit b935527b, by its author); `convert --layout` plots paper-space layouts at their page
+//! setup, taken over from storytold/cadcraft PR #1268 (commit 1769878, by its author).
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
 /// `println!` that doesn't panic when stdout is closed (`cadcraft-cli commands | head`) with

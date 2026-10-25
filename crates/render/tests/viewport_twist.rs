@@ -1,5 +1,9 @@
 //! A layout viewport with a view twist (DVIEW TWist inside it; DXF VIEWPORT group 51) shows model
 //! space turned on the sheet, on screen, when plotting and in the canvas's active-viewport list.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view twist
+//! (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{Common, Drawing, EntityKind, Line, Space, Viewport};
 use cadcraft_geom::{Bounds2, Vec2, Vec3};

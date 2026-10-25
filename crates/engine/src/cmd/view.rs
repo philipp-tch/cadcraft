@@ -1,5 +1,9 @@
 //! View menu: ZOOM (with Realtime and Dynamic), PAN, REGEN, REDRAW, named views (VIEW), the view
 //! twist (DVIEW TWist), layout switching.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{Space, entity_bounds};
 use cadcraft_geom::{Bounds2, Vec2};

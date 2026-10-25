@@ -4,6 +4,10 @@
 //! optionally a layer snapshot (a layer state restored with it). Views are stored in the drawing
 //! and round-trip through the DXF VIEW table. Restoring one is a view change like ZOOM: it goes
 //! into the view history, not the undo stack (a layer snapshot it restores is an undo step).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_doc::{LayerState, NamedView, Space};
 use cadcraft_geom::{Bounds2, Vec2};

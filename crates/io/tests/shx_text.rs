@@ -1,4 +1,8 @@
 //! Synthetic DXF STYLE -> TEXT/MTEXT -> display list, without external font fixtures.
+//!
+//! Added in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): user SHX text
+//! fonts (shapes 1.0/1.1, unifont 1.0) are read from CADCRAFT_SHXPATH and Latin accents stay
+//! single-stroke, taken over from storytold/cadcraft PR #1031 (commit 0de6ec8, by its author).
 
 use cadcraft_doc::Space;
 

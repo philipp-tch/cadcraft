@@ -1,4 +1,8 @@
 //! DIST snaps to the model geometry displayed in paper-space viewports (#516).
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use cadcraft_engine::doc::{Block, Circle, Common, Drawing, Entity, EntityKind, Handle, Insert, Line, Space, Viewport};
 use cadcraft_engine::geom::{Vec2, Vec3};

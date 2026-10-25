@@ -2,6 +2,10 @@
 //! block reference selected. It lists the drawing's blocks with a preview and description; a name
 //! no block has yet starts a new block. OK runs BEDIT with that name; the dialog itself never
 //! changes the drawing. JSON calls (`bedit {name}`) and a selected block reference skip it.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-25): the view
+//! twist (DVIEW, VIEWTWIST, tile, named-view and layout-viewport twist), taken over from
+//! storytold/cadcraft PR #1230 (by its author).
 
 use std::sync::Arc;
 
