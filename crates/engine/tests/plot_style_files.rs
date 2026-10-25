@@ -124,3 +124,23 @@ fn open_finds_a_named_table_next_to_the_drawing_and_reports_a_missing_one() {
     assert!(s.log.iter().any(|l| l.contains("Missing.ctb") && l.contains("not found")), "{:?}", s.log);
     let _ = std::fs::remove_dir_all(&dir);
 }
+
+/// Opened by a bare file name (as `cadcraft-cli run plan.dxf` does), the drawing's folder is the
+/// current one, and the table beside it is found too.
+#[test]
+fn open_by_a_bare_file_name_finds_the_table_in_the_current_folder() {
+    hooks();
+    let dir = folder("bare");
+    let mut s = Session::new();
+    let layout = s.doc().unwrap().layouts[0].name.clone();
+    s.execute("pagesetup", &json!({"layout": layout, "plotStyleTable": "Office.ctb"})).unwrap();
+    s.execute("saveas", &json!({"path": dir.join("plan.dxf").to_string_lossy()})).unwrap();
+    std::fs::write(dir.join("Office.ctb"), ctb()).unwrap();
+    // The other tests here use absolute paths, so moving the current folder does not touch them.
+    std::env::set_current_dir(&dir).unwrap();
+    let mut s = Session::new();
+    s.execute("open", &json!({"path": "plan.dxf"})).unwrap();
+    assert!(s.doc().unwrap().plot_style_tables.iter().any(|t| t.name.eq_ignore_ascii_case("Office.ctb")), "{:?}", s.log);
+    std::env::set_current_dir(std::env::temp_dir()).unwrap();
+    let _ = std::fs::remove_dir_all(&dir);
+}

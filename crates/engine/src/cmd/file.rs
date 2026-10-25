@@ -446,7 +446,8 @@ pub(crate) fn find_plot_styles(s: &mut Session, i: usize) {
         }
         let mut extra = Vec::new();
         if let Some(dir) = st.path.as_deref().and_then(|p| std::path::Path::new(p).parent()) {
-            extra.push(dir.to_path_buf());
+            // A drawing opened by a bare file name has the empty parent: its folder is `.`.
+            extra.push(if dir.as_os_str().is_empty() { std::path::PathBuf::from(".") } else { dir.to_path_buf() });
         }
         let dirs = plot_style_dirs(extra);
         let found: Vec<cadcraft_doc::PlotStyleTable> = wanted.iter().filter_map(|n| find_plot_style(n, &dirs)).collect();
