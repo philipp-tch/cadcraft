@@ -66,6 +66,10 @@ pub struct Prompt {
     /// the routine writes, so it cannot be read for the word "Select" (#1598).
     #[serde(skip_serializing_if = "std::ops::Not::not")]
     pub picks_one: bool,
+    /// The message asks for one of the keywords, so they follow it without "or" (DVIEW's
+    /// "Enter option [CAmera/TArget/…]:").
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub options_only: bool,
 }
 
 /// Parse `@distance<angle` (relative polar), returning `(distance, angle in radians)`.
