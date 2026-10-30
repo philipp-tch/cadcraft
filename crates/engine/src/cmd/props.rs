@@ -1,4 +1,7 @@
 //! Properties: per-object property edits, current properties, MATCHPROP, linetypes, units, RENAME.
+//!
+//! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-30): `properties.set`
+//! sets `thickness` and `elevation` (a polyline's elevation, a block reference's insertion z), the fork's own work.
 
 mod matchprop;
 mod rename;
@@ -16,7 +19,7 @@ use crate::{Accept, Input, Interactive, Prompt, Result, Session, Step};
 pub fn specs() -> Vec<CommandSpec> {
     vec![
         CommandSpec::new("properties", "Properties", run_get).menu(&["Modify", "Properties"]).alias(&["pr", "props", "ch"]).params("{handles?} → properties of the selection").noundo(),
-        CommandSpec::new("properties.set", "Set Properties", run_set).params("{handles?, layer?, color?, linetype?, lineweight?, ltscale?, transparency?: \"ByLayer\" | \"ByBlock\" | 0..90, visible?, <geometry fields: radius, center, start, end, text, height, rotation…>; dimensions: textOverride, dimStyle, textHeight, arrowSize, dimScale, precision (per-dimension overrides)}"),
+        CommandSpec::new("properties.set", "Set Properties", run_set).params("{handles?, layer?, color?, linetype?, lineweight?, ltscale?, transparency?: \"ByLayer\" | \"ByBlock\" | 0..90, visible?, <geometry fields: radius, center, start, end, text, height, rotation…>, thickness?, elevation? (polyline elevation, block reference z); dimensions: textOverride, dimStyle, textHeight, arrowSize, dimScale, precision (per-dimension overrides)}"),
         CommandSpec::new("matchprop", "Match Properties", matchprop::run_matchprop)
             .menu(&["Modify", "Match Properties"])
             .alias(&["ma", "painter"])
@@ -233,6 +236,17 @@ fn run_set(s: &mut Session, p: &Value) -> Result<Value> {
                 e.common.visible = v;
             }
             let num = |k: &str| p.get(k).and_then(Value::as_f64).filter(|v| v.is_finite());
+            // Otto fork: thickness and elevation (an insertion point's z), as the Properties palette sets them.
+            if let Some(t) = num("thickness") {
+                e.common.thickness = t;
+            }
+            if let Some(z) = num("elevation") {
+                match &mut e.kind {
+                    EntityKind::LwPolyline(l) => l.elevation = z,
+                    EntityKind::Insert(i) => i.insert.z = z,
+                    _ => {}
+                }
+            }
             match &mut e.kind {
                 EntityKind::Line(l) => {
                     if let Some(v) = p.get("start") {
