@@ -1,7 +1,8 @@
 //! Properties: per-object property edits, current properties, MATCHPROP, linetypes, units, RENAME.
 //!
 //! Modified in the Otto fork of CADCraft (github.com/philipp-tch/cadcraft, 2026-10-30): `properties.set`
-//! sets `thickness` and `elevation` (a polyline's elevation, a block reference's insertion z), the fork's own work.
+//! sets `thickness` and `elevation` (a polyline's elevation, a block reference's insertion z with its attributes),
+//! the fork's own work.
 
 mod matchprop;
 mod rename;
@@ -243,7 +244,17 @@ fn run_set(s: &mut Session, p: &Value) -> Result<Value> {
             if let Some(z) = num("elevation") {
                 match &mut e.kind {
                     EntityKind::LwPolyline(l) => l.elevation = z,
-                    EntityKind::Insert(i) => i.insert.z = z,
+                    EntityKind::Insert(i) => {
+                        // The attributes move with their reference, as when AutoCAD moves a block.
+                        let dz = z - i.insert.z;
+                        i.insert.z = z;
+                        for a in &mut i.attribs {
+                            a.text.insert.z += dz;
+                            if let Some(p) = a.text.align_pt.as_mut() {
+                                p.z += dz;
+                            }
+                        }
+                    }
                     _ => {}
                 }
             }

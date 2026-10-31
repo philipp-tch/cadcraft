@@ -38,3 +38,23 @@ fn a_block_reference_takes_the_z_of_its_insertion_point() {
         k => panic!("not a block reference: {k:?}"),
     }
 }
+
+#[test]
+fn the_attributes_go_up_with_their_block_reference() {
+    let mut s = Session::new();
+    s.execute("attdef", &json!({ "tag": "T", "default": "one", "at": [0, 1] })).unwrap();
+    s.execute("line", &json!({ "points": [[0, 0], [10, 0]] })).unwrap();
+    let hs: Vec<String> = s.doc().unwrap().model.iter().map(|e| e.handle.hex()).collect();
+    s.execute("block", &json!({ "name": "B", "base": [0, 0], "handles": hs, "keep": "delete" })).unwrap();
+    s.execute("insert", &json!({ "name": "B", "at": [3, 3] })).unwrap();
+    let h = last(&s);
+    s.execute("properties.set", &json!({ "handles": [h.hex()], "elevation": 579.1 })).unwrap();
+    let e = s.doc().unwrap().entity(h).cloned().unwrap();
+    match &e.kind {
+        EntityKind::Insert(i) => {
+            assert!(!i.attribs.is_empty());
+            assert!(i.attribs.iter().all(|a| (a.text.insert.z - 579.1).abs() < 1e-9), "attributes left behind");
+        }
+        k => panic!("not a block reference: {k:?}"),
+    }
+}
